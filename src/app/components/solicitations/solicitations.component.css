@@ -1,0 +1,51 @@
+.main {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    background: white;
+}
+
+.top {
+    padding: 10px;
+    border-bottom: 1px solid #c0e3c0;
+}
+
+.div-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-input { width: 100%; }
+
+.solicitation {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    border-bottom: 1px solid #c0e3c0;
+    display: flex;
+}
+.solicitation p, h6 { margin: 0; }
+.solicitation p { 
+    font-size: 14px; 
+    color: gray;
+}
+.ack { background: #F5FDF9 !important;}
+.solicitation:hover {
+    cursor: pointer;
+    background: rgb(227, 238, 233) !important;
+}
+
+.data {
+    width: 243px;
+    height: 100%;
+}
+
+.data p, h6 {   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info {
+    text-align: right;
+}

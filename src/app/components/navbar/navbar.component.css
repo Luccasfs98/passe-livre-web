@@ -1,0 +1,26 @@
+.navbar {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid lightgray;
+    justify-content: left;
+}
+
+.menu-icon{
+    width: 60px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img { height: 40px; }
+
+.top-nav {
+    width: calc(100% - 60px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.top-nav p { margin: 0; margin-right: 10px; }
+.top-nav p:hover { text-decoration: underline; cursor: pointer; }

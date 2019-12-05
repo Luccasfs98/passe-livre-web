@@ -1,0 +1,24 @@
+.main {
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+    background: #F5FDF9;
+    border-right: 1px solid #c0e3c0;
+    border-left: 1px solid #c0e3c0;
+    padding: 10px;
+}
+
+.info-box {
+    border: 1px solid #c0e3c0;
+}
+
+.col-5 { font-weight: bold; }
+.row { color: #444; }
+
+h6 { color: #666; }
+
+.info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

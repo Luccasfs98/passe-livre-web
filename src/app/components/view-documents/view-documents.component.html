@@ -1,0 +1,76 @@
+<div class="main">
+  <h5>Documentos</h5>
+  <hr>
+  <div *ngIf="!solicitation">
+    <h5 class="text-center">Selecione uma solicitação para visualizar os documentos</h5>
+  </div>
+  <div *ngIf="solicitation">
+    <div class="row m-0 p-0">
+      <div class="col-6 p-1" *ngFor="let file of files">
+        <!-- Quando imagem -->
+        <div *ngIf="file.type == 'image'">
+          <div class="content" (click)="openLightbox()" [ngStyle]="{'background-image':'url('+file.path+')'}">
+            <div class="overlay">
+            </div>
+            <div class="text">(clique para ampliar)</div>
+          </div>
+          <p class="doc-name mt-1">
+            {{ file.name }}
+            <!-- <i class="material-icons ml-1 download">file_download</i> -->
+          </p>
+        </div>
+        <!-- Quando pdf -->
+        <div *ngIf="file.type == 'pdf'">
+          <div class="file" (click)="openLightbox()">
+            <i class="material-icons">insert_drive_file</i>
+          </div>
+          <p class="doc-name mt-1">
+            {{ file.name }}
+            <!-- <i class="material-icons ml-1 download">file_download</i> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- The Modal/Lightbox -->
+<div id="myModal" class="modal">
+  <span class="close cursor" (click)="closeLightbox()">&times;</span>
+  <div class="lightbox-content">
+    <div class="side-helper">
+      <div class="thumbnail" *ngFor="let file of files" (click)="selectFile(file)" [ngClass]="{'active': verify(file)}">
+        <span *ngIf="file.type == 'image'">
+          <div class="thumb-photo" [ngStyle]="{'background-image':'url('+file.path+')'}"></div>
+        </span>
+        <span *ngIf="file.type == 'pdf'">
+          <div class="thumb-file">
+            <i class="material-icons">insert_drive_file</i>
+          </div>
+        </span>
+        <p>{{ file.name }}</p>
+      </div>
+    </div>
+    <div *ngIf="selectedFile" class="w-100">
+      <div class="photo">
+        <img *ngIf="selectedFile.type == 'image'" src="{{ selectedFile.path }}" alt="">
+        <div *ngIf="selectedFile.type == 'pdf'" class="main">
+          <iframe
+            [src]="transform(selectedFile.path)"
+            style="width:100%; height:570px;" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="caption">
+        <h5>{{ selectedFile.name }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

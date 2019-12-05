@@ -1,0 +1,48 @@
+<div class="main">
+  <div class="top">
+    <div class="div-header">
+      <h5>Solicitações</h5>
+      <div>
+        <select name="status" id="status" [(ngModel)]="status">
+          <option selected value="">Todas</option>
+          <option value="Aprovado">Aprovado</option>
+          <option value="Analise">Análise</option>
+          <option value="Inapto">Inapto</option>
+          <option value="Devolvido">Devolvido</option>
+          <option value="Pendente">Pendente</option>
+        </select>
+      </div>
+    </div>
+    <div class="div-input">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="material-icons">search</i>
+          </div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Pesquisar solicitação..." [(ngModel)]="text">
+      </div>
+    </div>
+  </div>
+  <loader *ngIf="loading"></loader>
+  <div class="solicitation" *ngFor="let solicitation of solicitations | filterName: text: status" (click)="selectSolicitation(solicitation)" [ngClass]="{ack: verify(solicitation)}">
+    <div class="data">
+      <h6>{{ solicitation.fullname }}</h6>
+      <p>{{ solicitation.cpf }}</p>
+      <p>{{ solicitation.phone }}</p>
+      <p>{{ solicitation.establishment }}</p>
+      <p>{{ solicitation.course }}</p>
+    </div>
+    <div class="info">
+      <span [ngSwitch]="solicitation.status">
+        <h6 *ngSwitchCase="'Pendente'" class="text-dark">Pendente</h6>
+        <h6 *ngSwitchCase="'Analise'" class="text-info">Análise</h6>
+        <h6 *ngSwitchCase="'Inapto'" class="text-danger">Inapto</h6>
+        <h6 *ngSwitchCase="'Aprovado'" class="text-success">Aprovado</h6>
+        <h6 *ngSwitchCase="'Devolvido'" class="text-warning">Devolvido</h6>
+        <div *ngSwitchDefault>Status</div>
+      </span>
+      <p>{{ solicitation.createdAt }}</p>
+    </div>
+  </div>
+</div>

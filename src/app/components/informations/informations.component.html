@@ -1,0 +1,131 @@
+<div class="main">
+  <div class="info-header">
+    <h5>Informações do estudante</h5>
+    <div *ngIf="solicitation" class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal"
+        (click)="selectModal(0)">
+        Aprovar</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#confirmModal"
+        (click)="selectModal(1)">
+        Análise</button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal"
+        (click)="selectModal(2)">
+        Inapto</button>
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal"
+        (click)="selectModal(3)">
+        Devolver</button>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="!solicitation">
+    <h5 class="text-center">Selecione uma solicitação para visualizar os dados</h5>
+  </div>
+  <div *ngIf="solicitation">
+    <h6>Dados pessoais</h6>
+    <div class="row m-0 p-0 info-box">
+      <div class="row m-0 p-1">
+        <div class="col-5">Nome</div>
+        <div class="col-7">{{ solicitation?.fullname }}</div>
+        <div class="col-5">CPF</div>
+        <div class="col-7">{{ solicitation?.cpf }}</div>
+        <div class="col-5">Data de nascimento</div>
+        <div class="col-7">{{ solicitation?.dateBirthday }}</div>
+        <div class="col-5">Nome do pai</div>
+        <div class="col-7">{{ solicitation?.nameFather }}</div>
+        <div class="col-5">Nome da mãe</div>
+        <div class="col-7">{{ solicitation?.nameMother }}</div>
+        <div class="col-5">Sexo</div>
+        <div class="col-7">{{ solicitation?.sex }}</div>
+        <div class="col-5">Tipo de solicitação</div>
+        <div class="col-7">{{ solicitation?.type }}</div>
+        <div class="col-5">Telefone</div>
+        <div class="col-7">{{ solicitation?.phone }}</div>
+      </div>
+    </div>
+    <h6 class="mt-3">Endereço</h6>
+    <div class="row m-0 p-0 info-box">
+      <div class="row m-0 p-1">
+        <div class="col-5">Endereço</div>
+        <div class="col-7">{{ solicitation?.street }}, {{ solicitation?.homeNumber }}</div>
+        <div class="col-5">Complemento</div>
+        <div class="col-7">{{ solicitation?.complement }}</div>
+        <div class="col-5">Bairro</div>
+        <div class="col-7">{{ solicitation?.neighborhood }}</div>
+        <div class="col-5">Cidade</div>
+        <div class="col-7">{{ solicitation?.city }}</div>
+        <div class="col-5">UF</div>
+        <div class="col-7">{{ solicitation?.uf }}</div>
+        <div class="col-5">CEP</div>
+        <div class="col-7">{{ solicitation?.cep }}</div>
+      </div>
+    </div>
+    <h6 class="mt-3">Ensino</h6>
+    <div class="row m-0 p-0 info-box">
+      <div class="row m-0 p-1">
+        <div class="col-5">Estabelecimento</div>
+        <div class="col-7">{{ solicitation?.collegeName }}</div>
+        <div class="col-5">Período</div>
+        <div class="col-7">{{ solicitation?.semesterPeriodStart }}/{{ solicitation?.semesterPeriodEnd }}</div>
+        <div class="col-5">Nível</div>
+        <div class="col-7">{{ solicitation?.level }}</div>
+        <div class="col-5">Turno</div>
+        <div class="col-7">{{ solicitation?.turn }}</div>
+        <div class="col-5">Nível</div>
+        <div class="col-7">{{ solicitation?.schoolDays }}</div>
+      </div>
+    </div>
+    <h6 class="mt-3">Transporte</h6>
+    <div class="row m-0 p-0 info-box">
+      <div class="row m-0 p-1">
+        <div class="col-5">Empresa de transporte</div>
+        <div class="col-7">{{ solicitation?.transportName }}</div>
+        <div class="col-5">Linha</div>
+        <div class="col-7">{{ solicitation?.line }}</div>
+        <div class="col-5">Já teve o passe livre intermunicipal em anos anteriores? </div>
+        <div class="col-7">
+          <span *ngIf="solicitation?.alreadyHavePasseLivre">Sim</span>
+          <span *ngIf="!solicitation?.alreadyHavePasseLivre">Não</span>
+        </div>
+        <div class="col-5">Utiliza integração?</div>
+        <div class="col-7">
+          <span *ngIf="solicitation?.useIntegration">Sim</span>
+          <span *ngIf="!solicitation?.useIntegration">Não</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div *ngIf="modalSelect != -1" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ modalOptions[modalSelect].title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span #closeButton aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseja realmente alterar o status da solicitação de <b>{{ solicitation.fullname }}</b> para
+        <b>{{ modalOptions[modalSelect].status }}</b>?
+        <div [formGroup]="solicitationForm" class="form-group">
+          <br>
+          <label for="reasonText">Motivo:</label>
+          <textarea class="form-control" id="reasonText" rows="3" formControlName="reason"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="updateSolicitation()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
