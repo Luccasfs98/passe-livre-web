@@ -8,15 +8,15 @@ import { SolicitationsService } from 'src/app/services/solicitations.service';
   styleUrls: ['./solicitations.component.css']
 })
 export class SolicitationsComponent implements OnInit {
-  @Output() messageEvent = new EventEmitter<any>();
 
   selectedSolicitation
   loading = true
   status = ''
 
+  text = ''
   filterName: FilterNamePipe
 
-  private solicitations: any[] = []
+  solicitations: any[] = []
   message:string = 'Hellow'
 
 
