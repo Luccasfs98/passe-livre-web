@@ -70,7 +70,7 @@
         <div class="col-7">{{ solicitation?.level }}</div>
         <div class="col-5">Turno</div>
         <div class="col-7">{{ solicitation?.turn }}</div>
-        <div class="col-5">Nível</div>
+        <div class="col-5">Dias em que estuda</div>
         <div class="col-7">{{ solicitation?.schoolDays }}</div>
       </div>
     </div>
@@ -81,7 +81,7 @@
         <div class="col-7">{{ solicitation?.transportName }}</div>
         <div class="col-5">Linha</div>
         <div class="col-7">{{ solicitation?.line }}</div>
-        <div class="col-5">Já teve o passe livre intermunicipal em anos anteriores? </div>
+        <div class="col-5">Já teve o passe livre? </div>
         <div class="col-7">
           <span *ngIf="solicitation?.alreadyHavePasseLivre">Sim</span>
           <span *ngIf="!solicitation?.alreadyHavePasseLivre">Não</span>
